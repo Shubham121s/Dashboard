@@ -9,7 +9,7 @@ import LoadingSpinner from "./components/loading-spinner"
 import { metrics, chartData } from "./data/metrics-data"
 
 export default function DashboardPage() {
-  const [range, setRange] = useState({})
+  // const [range, setRange] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [selectedMetric, setSelectedMetric] = useState(null)
 
@@ -19,8 +19,8 @@ export default function DashboardPage() {
     return () => clearTimeout(timer)
   }, [])
 
-  const handleRangeChange = (newRange) => {
-    setRange(newRange)
+  const handleRangeChange = () => {
+    // setRange(newRange)
     setIsLoading(true)
     // Simulate data fetching
     setTimeout(() => setIsLoading(false), 1000)

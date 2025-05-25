@@ -8,10 +8,18 @@ import DateRangePicker from "./components/date-range-picker"
 import LoadingSpinner from "./components/loading-spinner"
 import { metrics, chartData } from "./data/metrics-data"
 
+interface Metric {
+  title: string
+  value: string
+  icon: string
+  details: string
+  trend: string
+  change: string
+}
+
 export default function DashboardPage() {
-  // const [range, setRange] = useState({})
   const [isLoading, setIsLoading] = useState(true)
-  const [selectedMetric, setSelectedMetric] = useState(null)
+  const [selectedMetric, setSelectedMetric] = useState<Metric | null>(null)
 
   useEffect(() => {
     // Simulate loading
@@ -20,13 +28,12 @@ export default function DashboardPage() {
   }, [])
 
   const handleRangeChange = () => {
-    // setRange(newRange)
     setIsLoading(true)
     // Simulate data fetching
     setTimeout(() => setIsLoading(false), 1000)
   }
 
-  const handleMetricClick = (metric) => {
+  const handleMetricClick = (metric: Metric) => {
     setSelectedMetric(metric)
   }
 

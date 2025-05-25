@@ -2,12 +2,23 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Calendar, Filter } from "lucide-react"
+import React, { ChangeEvent } from "react";
 
-export default function DateRangePicker({ onChange }) {
+
+type DateRange = {
+  start: string
+  end: string
+}
+
+type DateRangePickerProps = {
+  onChange: (range: DateRange) => void
+}
+
+export default function DateRangePicker({ onChange }: DateRangePickerProps) {
   const [dateRange, setDateRange] = useState({ start: "", end: "" })
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     const updated = { ...dateRange, [name]: value }
     setDateRange(updated)

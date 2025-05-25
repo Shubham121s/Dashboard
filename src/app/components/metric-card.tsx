@@ -2,7 +2,18 @@
 import { motion } from "framer-motion"
 import { TrendingUp, TrendingDown } from "lucide-react"
 
-export default function MetricCard({ title, value, icon, onClick, isSelected, trend = "up", change = "+12%" }) {
+
+type MetricCardProps = {
+  title: string
+  value: string | number
+  icon: React.ReactNode
+  onClick?: () => void
+  isSelected?: boolean
+  trend?: "up" | "down"
+  change?: string
+}
+
+export default function MetricCard({ title, value, icon, onClick, isSelected, trend = "up", change = "+12%" }: MetricCardProps) {
   return (
     <motion.div
       onClick={onClick}

@@ -13,6 +13,7 @@ import {
   Legend,
   Filler,
 } from "chart.js"
+import { ChartData, } from "chart.js"
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, ArcElement, Tooltip, Legend, Filler)
 
@@ -39,7 +40,15 @@ const itemVariants = {
   },
 }
 
-export default function ChartContainer({ data }) {
+interface ChartContainerProps {
+  data: {
+    line: ChartData<"line">;
+    bar: ChartData<"bar">;
+    pie: ChartData<"doughnut">;
+  };
+}
+
+export default function ChartContainer({ data }: ChartContainerProps) {
   const enhancedLineData = {
     ...data.line,
     datasets: data.line.datasets.map((dataset) => ({
@@ -143,6 +152,8 @@ export default function ChartContainer({ data }) {
     {
       title: "Device Usage",
       chart: <Doughnut data={data.pie} options={doughnutOptions} />,
+      
+
       gradient: "from-purple-500/20 to-pink-500/20",
       icon: "📱",
     },
@@ -166,7 +177,6 @@ export default function ChartContainer({ data }) {
           className={`relative overflow-hidden bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-xl p-6 rounded-3xl border border-white/20 group`}
           style={{ transformStyle: "preserve-3d" }}
         >
-          {/* Animated background */}
           <div
             className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
           ></div>
@@ -180,7 +190,6 @@ export default function ChartContainer({ data }) {
             <div className="h-64 relative">{item.chart}</div>
           </div>
 
-          {/* Glow effect */}
           <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
         </motion.div>
       ))}
